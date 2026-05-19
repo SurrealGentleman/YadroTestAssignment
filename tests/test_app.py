@@ -57,6 +57,12 @@ def test_person_page_by_id(
     assert "Город, улица 1" in response.text
 
 
+def test_person_page_returns_404_for_missing_person(client: TestClient) -> None:
+    response = client.get("/999")
+
+    assert response.status_code == 404
+
+
 def test_random_person_returns_existing_person(
     client: TestClient,
     create_people: Callable[[int], None],
