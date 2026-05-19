@@ -1,0 +1,2 @@
+﻿"""Random people web application."""
+

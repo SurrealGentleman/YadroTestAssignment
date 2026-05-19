@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% set title = "База людей" %}
+
+{% block content %}
+<header class="topbar">
+  <div>
+    <h1>База людей</h1>
+    <p>Всего записей: {{ total }}</p>
+  </div>
+  <a class="button secondary" href="/random">Случайный пользователь</a>
+</header>
+
+<form class="load-form" action="/load" method="post">
+  <label for="count">Сколько человек загрузить из API</label>
+  <div class="form-row">
+    <input id="count" name="count" type="number" min="1" max="100000" value="1000" required>
+    <button class="button" type="submit">Загрузить</button>
+  </div>
+</form>
+
+<section class="table-wrap" aria-label="Люди">
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Пол</th>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>Телефон</th>
+        <th>Email</th>
+        <th>Место проживания</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for person in people %}
+      <tr>
+        <td>{{ person.id }}</td>
+        <td>{{ person.gender }}</td>
+        <td>{{ person.first_name }}</td>
+        <td>{{ person.last_name }}</td>
+        <td class="phone-cell">{{ person.phone }}</td>
+        <td>{{ person.email }}</td>
+        <td class="address-cell">{{ person.address }}</td>
+        <td><a href="/{{ person.id }}">Открыть</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+
+<nav class="pagination" aria-label="Пагинация">
+  {% if page > 1 %}
+    <a href="/?page={{ page - 1 }}&per_page={{ per_page }}">Назад</a>
+  {% endif %}
+  <span>Страница {{ page }} из {{ pages }}</span>
+  {% if page < pages %}
+    <a href="/?page={{ page + 1 }}&per_page={{ per_page }}">Вперед</a>
+  {% endif %}
+</nav>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<header class="topbar">
+  <div>
+    <h1>{{ title }}</h1>
+    <p>ID: {{ person.id }}</p>
+  </div>
+  <a class="button secondary" href="/">К таблице</a>
+</header>
+
+<section class="details">
+  <dl>
+    <dt>Пол</dt>
+    <dd>{{ person.gender }}</dd>
+    <dt>Имя</dt>
+    <dd>{{ person.first_name }}</dd>
+    <dt>Фамилия</dt>
+    <dd>{{ person.last_name }}</dd>
+    <dt>Телефон</dt>
+    <dd>{{ person.phone }}</dd>
+    <dt>Email</dt>
+    <dd>{{ person.email }}</dd>
+    <dt>Место проживания</dt>
+    <dd>{{ person.address }}</dd>
+  </dl>
+</section>
+{% endblock %}
